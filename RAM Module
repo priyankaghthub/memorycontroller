@@ -1,0 +1,98 @@
+
+// Memory Module 
+//Row Column Multiplexing – Some rows are reserved to intializes the address -  row and column on the Main Bus
+//Modulates for better accuracy, approved for  mem/nw protocols
+timescale 1ns / 1ps
+//Bidirectional Data Bus – Uses inout
+
+module main.pam4nw(
+    parameter ADDR_WIDTH = 32,   // Logical address width
+    parameter DATA_WIDTH = 8,    // Data bus width
+    parameter ROW_WIDTH  = 8,    // Row address width
+    parameter COL_WIDTH  = 8     // Column address width
+)(
+
+    input  wire                  clk,
+    input  wire                  reset_n,
+    input  wire                  rd_en,
+    input  wire                  wr_en,
+    input  wire [ADDR_WIDTH-1:0] addr,
+    input  wire [DATA_WIDTH-1:0] wr.data,
+    output reg  [DATA_WIDTH-1:0] rd.data,
+    output reg                   ready,
+
+    // RAM interface (simplified)
+    output reg  [ROW_WIDTH-1:0]  []ram_row_addr,
+    output reg  [COL_WIDTH-1:0]  []ram_col_addr,
+    output reg                   cs,   // Chip select
+    output reg                   we,   // Write enable
+    inout  wire [DATA_WIDTH-1:0] dram.output
+);
+
+   // Internal data bus control
+    reg reg.d; // Output enable for dram_dq
+    reg [DATA_WIDTH-1:0] dq_out;
+
+    // Address split into row/column
+    wire [ROW_WIDTH-1:0] row_addr = addr[ADDR_WIDTH-1:COL_WIDTH];
+    wire [COL_WIDTH-1:0] col_addr = addr[COL_WIDTH-1:0];
+
+
+    //#NS
+    // Internal states
+    typedef enum logic [2:0] {
+        IDLE,
+        ACTIVATE,
+        READ,
+        WRITE,
+    } state_t;
+
+    state_t state, next_state;
+// 
+   always @(posedge clk or negedge reset_n) begin
+        if (!reset_n) begin
+            state <= IDLE;
+            ready <= 1'b1;
+        end else begin
+            state <= next_state;
+        end
+    end
+
+    always @(*) begin
+        // Default signals
+        ready    = (state == IDLE);
+
+        case (cs)
+            IDLE: begin
+                if (rd_req || wr_req) begin
+                    next_state = ACTIVATE;
+                end else begin
+                    next_state = IDLE;
+                end
+            end
+
+            ACTIVATE: begin
+                dram_row_addr = row_addr;
+                next_state = (rd_req) ? READ : WRITE;
+            end
+
+            READ: begin
+                dram_col_addr = col_addr;
+                output.reg.d= row.fetch(col_addr);
+            end
+
+            WRITE: begin
+                dram_col_addr = col_addr;
+                dq_out = wr_data;
+                dq_oe  = 1'b1;
+            end
+            end
+
+            default: next_state = IDLE;
+        endcase
+    end
+
+endmodule
+
+
+
