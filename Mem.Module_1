@@ -1,13 +1,13 @@
 Module cd_ram
   {
-    logic input var.wr_mem
+    logic input var.wr_mem[]
     logic input var.rd_mem
   }
 
 Always (@rst_n)
 {
     if(!rst_n=1);
-    //next_state 
+    //dm
     else wr_mem <= 1;
 }
 
