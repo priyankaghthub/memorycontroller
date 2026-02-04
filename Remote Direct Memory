@@ -1,0 +1,27 @@
+#include <stdlib.h>
+#include <soc.h>
+//#include <os.h>
+
+
+
+input logic interrupt
+input logic writefields[][]
+input logic reg.chain[][]
+
+//def os.soc..initated.write()
+//import protocol mapper from Si.lib[]
+
+def html.intiated.write( interrupt, writefields)
+ if(interrupt==1)
+    os.infowrite.chunks => writefields
+        for(i=1;  i< writefields[i][1] ; i++)
+        writefields[i]=> header
+        //power impact 
+        for(j=1;   j<writefields[1][j]; j++)
+            {
+              writefields[j]=> register.chain(j)
+              //  allocate.tablet.tile[].writes()++
+              allocate.transformernetwork.core[n].write(register.chain(j))
+            }
+
+def allocate.transformernetwork.core.write(register, network_axis, core[loc])
