@@ -1,1 +1,6 @@
-memorycontroller
+[MemoryController
+SOC
+Platform
+Network
+UI]
+
