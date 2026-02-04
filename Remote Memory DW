@@ -1,6 +1,5 @@
 #include <CTSlib.h>
-
-#include <soc.h>
+#include <cts.h>
 //#include <os.h>
 
 //# []B. loc.write.ptch.wuukjb
