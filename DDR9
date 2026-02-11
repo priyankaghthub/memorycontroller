@@ -1,0 +1,42 @@
+Chief Technology Officer -  Architecture
+#include <hardwareutilities.intel>
+import container.Intel
+import container.visualwrites
+
+
+// comments from: import these from the package enableselects
+
+/***DDR signal groups
+ Pinout Grouping 
+//Enable
+    Clock
+             
+          Clock enable = clockcontroller.clockenable   
+              <Differential> clock inputs 
+
+//Aspects // add return statement for visual writes
+          Vref 
+          Vtt
+
+
+// Pallet Length = 1028 bytes data bus
+Header
+/*/
+Data
+
+Data Enable
+Data packets []
+Data Redudancy enable #EC **/
+
+public class DDR {
+
+main (arg[])
+
+enableselects es = new  
+write platform.design= new  board'managementcontroller()
+write platform.design= new  board'networkutils()
+
+Return <>
+
+//Impedance Measurements
+
