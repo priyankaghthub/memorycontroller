@@ -1,0 +1,15 @@
+//Sram module with innetwork inference for continous network activity
+//upgrade the datawrites
+
+//application picture writes at samples of <20persec>
+
+initial begin 
+
+    input  wire                   write_en,
+    input  wire [DATA_WIDTH-1:0]  address,
+    input  wire [DATA_WIDTH-1:0]  write_data,
+            with (write_en) begin
+                every #10ns W=DATA_WIDTH++ begin
+                  reg [DATA_WIDTH-1:0] sram_mem [0:(1<<ADDR_WIDTH)-1];
+                    address[Available] ? 1: return [address,chunks]
+                        sram_mem[address][w] <= write_data[address][w]; 
