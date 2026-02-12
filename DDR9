@@ -1,6 +1,6 @@
 Chief Technology Officer -  Architecture
-#include <hardwareutilities.intel>
-import container.Intel
+#include <hardwareutilities.<>>
+import container.<>.product<>
 import container.visualwrites
 
 
