@@ -14,5 +14,21 @@ C1 C2 C3 C'S
 C1   0          1         1          0 
 C1'  1          0         0          1
 
+Public void Module_Adder(mem_pointer[] )
+//invclude mem.write 
+Authentication write = new write();
+reg In_var, out_var,
+wire S,C;
+
+intial begin 
+//Enable : Poweron
+in_varC1 = 1'b1; #10ns
+in_varC1=1'b0;
+forever #2 C2= ~C2;//
 C= C1C2 + (C1'C2)C3
 S= C1'+'C2+' C3'
+
+write.S;
+write.C;
+
+end
