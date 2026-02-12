@@ -2,7 +2,7 @@
 //upgrade the datawrites
 
 //application picture writes at samples of <20persec>
-
+// write @ 20persec 
 initial begin 
 
     input  wire                   write_en,
